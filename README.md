@@ -13,6 +13,13 @@ Este proyecto implementa un sistema avanzado de traducción de lenguaje natural 
 - **Interfaz Gráfica Amigable**: Proporciona una experiencia de usuario intuitiva
 - **Depuración y Transparencia**: Permite ver el proceso de generación de consultas paso a paso
 
+## Archivos Excluidos del Repositorio
+
+Por razones de tamaño, los siguientes archivos no están incluidos en el repositorio y deben obtenerse de forma separada:
+
+- **Base de datos AdventureWorks**: El archivo `data/AdventureWorks2019.bak` debe descargarse desde el sitio oficial de Microsoft y colocarse en el directorio `data/`.
+- **Vectorstore FAISS**: El directorio `vectorstore/` se generará automáticamente la primera vez que se ejecute la aplicación.
+
 ## Arquitectura del Sistema
 
 El sistema implementa una arquitectura cliente-servidor con los siguientes componentes:
@@ -155,8 +162,9 @@ Ambos se combinan para generar prompts enriquecidos que mejoran la calidad del S
 
 1. Clonar el repositorio:
    ```
-   git clone https://github.com/usuario/nl2sql-adventureworks.git
-   cd nl2sql-adventureworks
+   git clone https://github.com/abenavidezUM/TIF.git
+   cd TIF
+   git checkout dev
    ```
 
 2. Instalar dependencias:
@@ -164,7 +172,12 @@ Ambos se combinan para generar prompts enriquecidos que mejoran la calidad del S
    pip install -r requirements.txt
    ```
 
-3. Crear archivo `.env` con la configuración:
+3. Descargar la base de datos AdventureWorks:
+   - Visitar [Microsoft SQL Server Samples](https://github.com/Microsoft/sql-server-samples/releases/tag/adventureworks)
+   - Descargar `AdventureWorks2019.bak`
+   - Copiar a la carpeta `data/` del proyecto
+
+4. Crear archivo `.env` con la configuración:
    ```
    OPENAI_API_KEY=sk-your-api-key
    SQL_SERVER=localhost,1433
