@@ -30,4 +30,9 @@ vectorstore/
 .idea/
 .vscode/
 *.swp
-*.swo 
+*.swo
+
+# Archivos grandes
+*.bak
+*.zip
+*.tar.gz 
