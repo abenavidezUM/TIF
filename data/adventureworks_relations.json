@@ -1,0 +1,210 @@
+[
+    {
+        "Table1": "Production.Product",
+        "Column1": "ProductID",
+        "Relation": "has many",
+        "Table2": "Sales.SalesOrderDetail",
+        "Column2": "ProductID",
+        "Description": "Un producto puede aparecer en muchos detalles de órdenes de venta diferentes."
+    },
+    {
+        "Table1": "Production.Product",
+        "Column1": "ProductID",
+        "Relation": "has many",
+        "Table2": "Production.ProductInventory",
+        "Column2": "ProductID",
+        "Description": "Un producto puede tener registros de inventario en múltiples ubicaciones."
+    },
+    {
+        "Table1": "Production.Product",
+        "Column1": "ProductSubcategoryID",
+        "Relation": "belongs to",
+        "Table2": "Production.ProductSubcategory",
+        "Column2": "ProductSubcategoryID",
+        "Description": "Un producto pertenece a una subcategoría específica."
+    },
+    {
+        "Table1": "Production.ProductSubcategory",
+        "Column1": "ProductCategoryID",
+        "Relation": "belongs to",
+        "Table2": "Production.ProductCategory",
+        "Column2": "ProductCategoryID",
+        "Description": "Una subcategoría pertenece a una categoría principal de productos."
+    },
+    {
+        "Table1": "Production.ProductSubcategory",
+        "Column1": "ProductSubcategoryID",
+        "Relation": "has many",
+        "Table2": "Production.Product",
+        "Column2": "ProductSubcategoryID",
+        "Description": "Una subcategoría puede tener muchos productos asociados."
+    },
+    {
+        "Table1": "Production.ProductCategory",
+        "Column1": "ProductCategoryID",
+        "Relation": "has many",
+        "Table2": "Production.ProductSubcategory",
+        "Column2": "ProductCategoryID",
+        "Description": "Una categoría puede tener muchas subcategorías asociadas."
+    },
+    {
+        "Table1": "Sales.Customer",
+        "Column1": "CustomerID",
+        "Relation": "has many",
+        "Table2": "Sales.SalesOrderHeader",
+        "Column2": "CustomerID",
+        "Description": "Un cliente puede tener muchas órdenes de venta."
+    },
+    {
+        "Table1": "Sales.Customer",
+        "Column1": "PersonID",
+        "Relation": "belongs to",
+        "Table2": "Person.Person",
+        "Column2": "BusinessEntityID",
+        "Description": "Un cliente individual está asociado a una persona específica."
+    },
+    {
+        "Table1": "Person.Person",
+        "Column1": "BusinessEntityID",
+        "Relation": "has one",
+        "Table2": "HumanResources.Employee",
+        "Column2": "BusinessEntityID",
+        "Description": "Una persona puede ser un empleado de la empresa."
+    },
+    {
+        "Table1": "Person.Person",
+        "Column1": "BusinessEntityID",
+        "Relation": "has many",
+        "Table2": "Person.PersonPhone",
+        "Column2": "BusinessEntityID",
+        "Description": "Una persona puede tener múltiples números de teléfono."
+    },
+    {
+        "Table1": "Person.Person",
+        "Column1": "BusinessEntityID",
+        "Relation": "has many",
+        "Table2": "Person.EmailAddress",
+        "Column2": "BusinessEntityID",
+        "Description": "Una persona puede tener múltiples direcciones de correo electrónico."
+    },
+    {
+        "Table1": "Person.BusinessEntityAddress",
+        "Column1": "BusinessEntityID",
+        "Relation": "belongs to",
+        "Table2": "Person.Person",
+        "Column2": "BusinessEntityID",
+        "Description": "Una dirección de negocio está asociada a una persona específica."
+    },
+    {
+        "Table1": "Person.BusinessEntityAddress",
+        "Column1": "AddressID",
+        "Relation": "belongs to",
+        "Table2": "Person.Address",
+        "Column2": "AddressID",
+        "Description": "Una dirección de negocio está asociada a una dirección específica."
+    },
+    {
+        "Table1": "Person.Address",
+        "Column1": "StateProvinceID",
+        "Relation": "belongs to",
+        "Table2": "Person.StateProvince",
+        "Column2": "StateProvinceID",
+        "Description": "Una dirección pertenece a un estado o provincia específica."
+    },
+    {
+        "Table1": "Person.StateProvince",
+        "Column1": "CountryRegionCode",
+        "Relation": "belongs to",
+        "Table2": "Person.CountryRegion",
+        "Column2": "CountryRegionCode",
+        "Description": "Un estado o provincia pertenece a un país o región específica."
+    },
+    {
+        "Table1": "Person.StateProvince",
+        "Column1": "TerritoryID",
+        "Relation": "belongs to",
+        "Table2": "Sales.SalesTerritory",
+        "Column2": "TerritoryID",
+        "Description": "Un estado o provincia está asociado a un territorio de ventas específico."
+    },
+    {
+        "Table1": "Sales.SalesOrderHeader",
+        "Column1": "SalesOrderID",
+        "Relation": "has many",
+        "Table2": "Sales.SalesOrderDetail",
+        "Column2": "SalesOrderID",
+        "Description": "Una orden de venta tiene muchos detalles de línea."
+    },
+    {
+        "Table1": "Sales.SalesOrderHeader",
+        "Column1": "CustomerID",
+        "Relation": "belongs to",
+        "Table2": "Sales.Customer",
+        "Column2": "CustomerID",
+        "Description": "Una orden de venta pertenece a un cliente específico."
+    },
+    {
+        "Table1": "Sales.SalesOrderHeader",
+        "Column1": "SalesPersonID",
+        "Relation": "belongs to",
+        "Table2": "Sales.SalesPerson",
+        "Column2": "BusinessEntityID",
+        "Description": "Una orden de venta puede estar asociada a un vendedor específico."
+    },
+    {
+        "Table1": "Sales.SalesOrderHeader",
+        "Column1": "TerritoryID",
+        "Relation": "belongs to",
+        "Table2": "Sales.SalesTerritory",
+        "Column2": "TerritoryID",
+        "Description": "Una orden de venta está asociada a un territorio de ventas específico."
+    },
+    {
+        "Table1": "Sales.SalesOrderDetail",
+        "Column1": "SalesOrderID",
+        "Relation": "belongs to",
+        "Table2": "Sales.SalesOrderHeader",
+        "Column2": "SalesOrderID",
+        "Description": "Un detalle de línea pertenece a una orden de venta específica."
+    },
+    {
+        "Table1": "Sales.SalesOrderDetail",
+        "Column1": "ProductID",
+        "Relation": "belongs to",
+        "Table2": "Production.Product",
+        "Column2": "ProductID",
+        "Description": "Un detalle de línea está asociado a un producto específico."
+    },
+    {
+        "Table1": "Sales.SalesPerson",
+        "Column1": "BusinessEntityID",
+        "Relation": "belongs to",
+        "Table2": "HumanResources.Employee",
+        "Column2": "BusinessEntityID",
+        "Description": "Un vendedor es un empleado específico."
+    },
+    {
+        "Table1": "Sales.SalesPerson",
+        "Column1": "TerritoryID",
+        "Relation": "belongs to",
+        "Table2": "Sales.SalesTerritory",
+        "Column2": "TerritoryID",
+        "Description": "Un vendedor puede estar asignado a un territorio de ventas específico."
+    },
+    {
+        "Table1": "Production.ProductInventory",
+        "Column1": "ProductID",
+        "Relation": "belongs to",
+        "Table2": "Production.Product",
+        "Column2": "ProductID",
+        "Description": "Un registro de inventario está asociado a un producto específico."
+    },
+    {
+        "Table1": "Production.ProductInventory",
+        "Column1": "LocationID",
+        "Relation": "belongs to",
+        "Table2": "Production.Location",
+        "Column2": "LocationID",
+        "Description": "Un registro de inventario está asociado a una ubicación específica."
+    }
+] 

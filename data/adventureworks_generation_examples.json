@@ -1,0 +1,82 @@
+[
+    {
+        "Pregunta": "¿Cuántos productos hay por categoría?",
+        "Consulta SQL Generada": "SELECT [Production].[ProductCategory].[Name] AS CategoryName, COUNT([Production].[Product].[ProductID]) AS ProductCount FROM [Production].[Product] INNER JOIN [Production].[ProductSubcategory] ON [Production].[Product].[ProductSubcategoryID] = [Production].[ProductSubcategory].[ProductSubcategoryID] INNER JOIN [Production].[ProductCategory] ON [Production].[ProductSubcategory].[ProductCategoryID] = [Production].[ProductCategory].[ProductCategoryID] GROUP BY [Production].[ProductCategory].[Name] ORDER BY ProductCount DESC;"
+    },
+    {
+        "Pregunta": "Muestra los 5 primeros productos con sus nombres y precios",
+        "Consulta SQL Generada": "SELECT TOP 5 [Production].[Product].[ProductID], [Production].[Product].[Name], [Production].[Product].[ListPrice] FROM [Production].[Product] ORDER BY [Production].[Product].[ProductID];"
+    },
+    {
+        "Pregunta": "¿Cuál es el producto más caro?",
+        "Consulta SQL Generada": "SELECT TOP 1 [Production].[Product].[ProductID], [Production].[Product].[Name], [Production].[Product].[ListPrice] FROM [Production].[Product] ORDER BY [Production].[Product].[ListPrice] DESC;"
+    },
+    {
+        "Pregunta": "¿Cuáles son las ventas totales por territorio?",
+        "Consulta SQL Generada": "SELECT [Sales].[SalesTerritory].[Name] AS Territory, SUM([Sales].[SalesOrderHeader].[TotalDue]) AS TotalSales FROM [Sales].[SalesOrderHeader] INNER JOIN [Sales].[SalesTerritory] ON [Sales].[SalesOrderHeader].[TerritoryID] = [Sales].[SalesTerritory].[TerritoryID] GROUP BY [Sales].[SalesTerritory].[Name] ORDER BY TotalSales DESC;"
+    },
+    {
+        "Pregunta": "¿Quiénes son los mejores vendedores en términos de ventas totales?",
+        "Consulta SQL Generada": "SELECT TOP 10 [Person].[Person].[BusinessEntityID], [Person].[Person].[FirstName] + ' ' + [Person].[Person].[LastName] AS SalesPersonName, [Sales].[SalesPerson].[SalesYTD] FROM [Sales].[SalesPerson] INNER JOIN [Person].[Person] ON [Sales].[SalesPerson].[BusinessEntityID] = [Person].[Person].[BusinessEntityID] ORDER BY [Sales].[SalesPerson].[SalesYTD] DESC;"
+    },
+    {
+        "Pregunta": "¿Cuáles son los productos más vendidos?",
+        "Consulta SQL Generada": "SELECT TOP 10 [Production].[Product].[ProductID], [Production].[Product].[Name], SUM([Sales].[SalesOrderDetail].[OrderQty]) AS TotalQuantity FROM [Sales].[SalesOrderDetail] INNER JOIN [Production].[Product] ON [Sales].[SalesOrderDetail].[ProductID] = [Production].[Product].[ProductID] GROUP BY [Production].[Product].[ProductID], [Production].[Product].[Name] ORDER BY TotalQuantity DESC;"
+    },
+    {
+        "Pregunta": "Lista de clientes con sus direcciones completas",
+        "Consulta SQL Generada": "SELECT [Person].[Person].[BusinessEntityID], [Person].[Person].[FirstName] + ' ' + [Person].[Person].[LastName] AS CustomerName, [Person].[Address].[AddressLine1], [Person].[Address].[AddressLine2], [Person].[Address].[City], [Person].[StateProvince].[Name] AS StateProvince, [Person].[CountryRegion].[Name] AS Country, [Person].[Address].[PostalCode] FROM [Sales].[Customer] INNER JOIN [Person].[Person] ON [Sales].[Customer].[PersonID] = [Person].[Person].[BusinessEntityID] INNER JOIN [Person].[BusinessEntityAddress] ON [Person].[Person].[BusinessEntityID] = [Person].[BusinessEntityAddress].[BusinessEntityID] INNER JOIN [Person].[Address] ON [Person].[BusinessEntityAddress].[AddressID] = [Person].[Address].[AddressID] INNER JOIN [Person].[StateProvince] ON [Person].[Address].[StateProvinceID] = [Person].[StateProvince].[StateProvinceID] INNER JOIN [Person].[CountryRegion] ON [Person].[StateProvince].[CountryRegionCode] = [Person].[CountryRegion].[CountryRegionCode] WHERE [Sales].[Customer].[PersonID] IS NOT NULL;"
+    },
+    {
+        "Pregunta": "¿Cuál es el inventario actual por producto y ubicación?",
+        "Consulta SQL Generada": "SELECT [Production].[Product].[ProductID], [Production].[Product].[Name] AS ProductName, [Production].[Location].[Name] AS LocationName, [Production].[ProductInventory].[Quantity] FROM [Production].[ProductInventory] INNER JOIN [Production].[Product] ON [Production].[ProductInventory].[ProductID] = [Production].[Product].[ProductID] INNER JOIN [Production].[Location] ON [Production].[ProductInventory].[LocationID] = [Production].[Location].[LocationID] ORDER BY [Production].[Product].[Name], [Production].[Location].[Name];"
+    },
+    {
+        "Pregunta": "Obtener el detalle de las órdenes de compra por proveedor",
+        "Consulta SQL Generada": "SELECT [Purchasing].[Vendor].[BusinessEntityID], [Purchasing].[Vendor].[Name] AS VendorName, [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID], [Purchasing].[PurchaseOrderHeader].[OrderDate], [Purchasing].[PurchaseOrderDetail].[ProductID], [Production].[Product].[Name] AS ProductName, [Purchasing].[PurchaseOrderDetail].[OrderQty], [Purchasing].[PurchaseOrderDetail].[UnitPrice], [Purchasing].[PurchaseOrderDetail].[LineTotal] FROM [Purchasing].[PurchaseOrderHeader] INNER JOIN [Purchasing].[Vendor] ON [Purchasing].[PurchaseOrderHeader].[VendorID] = [Purchasing].[Vendor].[BusinessEntityID] INNER JOIN [Purchasing].[PurchaseOrderDetail] ON [Purchasing].[PurchaseOrderHeader].[PurchaseOrderID] = [Purchasing].[PurchaseOrderDetail].[PurchaseOrderID] INNER JOIN [Production].[Product] ON [Purchasing].[PurchaseOrderDetail].[ProductID] = [Production].[Product].[ProductID] ORDER BY [Purchasing].[Vendor].[Name], [Purchasing].[PurchaseOrderHeader].[OrderDate];"
+    },
+    {
+        "Pregunta": "Número de empleados por departamento",
+        "Consulta SQL Generada": "SELECT [HumanResources].[Department].[Name] AS Department, COUNT([HumanResources].[EmployeeDepartmentHistory].[BusinessEntityID]) AS EmployeeCount FROM [HumanResources].[EmployeeDepartmentHistory] INNER JOIN [HumanResources].[Department] ON [HumanResources].[EmployeeDepartmentHistory].[DepartmentID] = [HumanResources].[Department].[DepartmentID] WHERE [HumanResources].[EmployeeDepartmentHistory].[EndDate] IS NULL GROUP BY [HumanResources].[Department].[Name] ORDER BY EmployeeCount DESC;"
+    },
+    {
+        "Pregunta": "¿Cuál es la ganancia bruta por producto?",
+        "Consulta SQL Generada": "SELECT [Production].[Product].[ProductID], [Production].[Product].[Name], SUM([Sales].[SalesOrderDetail].[OrderQty] * ([Sales].[SalesOrderDetail].[UnitPrice] - [Production].[Product].[StandardCost])) AS GrossProfit FROM [Sales].[SalesOrderDetail] INNER JOIN [Production].[Product] ON [Sales].[SalesOrderDetail].[ProductID] = [Production].[Product].[ProductID] GROUP BY [Production].[Product].[ProductID], [Production].[Product].[Name] ORDER BY GrossProfit DESC;"
+    },
+    {
+        "Pregunta": "Lista de productos con su subcategoría y categoría",
+        "Consulta SQL Generada": "SELECT [Production].[Product].[ProductID], [Production].[Product].[Name] AS ProductName, [Production].[ProductSubcategory].[Name] AS SubCategory, [Production].[ProductCategory].[Name] AS Category FROM [Production].[Product] LEFT JOIN [Production].[ProductSubcategory] ON [Production].[Product].[ProductSubcategoryID] = [Production].[ProductSubcategory].[ProductSubcategoryID] LEFT JOIN [Production].[ProductCategory] ON [Production].[ProductSubcategory].[ProductCategoryID] = [Production].[ProductCategory].[ProductCategoryID] ORDER BY [Production].[ProductCategory].[Name], [Production].[ProductSubcategory].[Name], [Production].[Product].[Name];"
+    },
+    {
+        "Pregunta": "Ventas totales por mes del año pasado",
+        "Consulta SQL Generada": "SELECT MONTH([Sales].[SalesOrderHeader].[OrderDate]) AS Month, DATENAME(month, [Sales].[SalesOrderHeader].[OrderDate]) AS MonthName, SUM([Sales].[SalesOrderHeader].[TotalDue]) AS TotalSales FROM [Sales].[SalesOrderHeader] WHERE YEAR([Sales].[SalesOrderHeader].[OrderDate]) = YEAR(GETDATE()) - 1 GROUP BY MONTH([Sales].[SalesOrderHeader].[OrderDate]), DATENAME(month, [Sales].[SalesOrderHeader].[OrderDate]) ORDER BY Month;"
+    },
+    {
+        "Pregunta": "Productos agrupados por color",
+        "Consulta SQL Generada": "SELECT [Production].[Product].[Color], COUNT([Production].[Product].[ProductID]) AS ProductCount FROM [Production].[Product] WHERE [Production].[Product].[Color] IS NOT NULL GROUP BY [Production].[Product].[Color] ORDER BY ProductCount DESC;"
+    },
+    {
+        "Pregunta": "Clientes que compraron productos de ciclismo",
+        "Consulta SQL Generada": "SELECT DISTINCT [Person].[Person].[BusinessEntityID], [Person].[Person].[FirstName] + ' ' + [Person].[Person].[LastName] AS CustomerName FROM [Sales].[Customer] INNER JOIN [Person].[Person] ON [Sales].[Customer].[PersonID] = [Person].[Person].[BusinessEntityID] INNER JOIN [Sales].[SalesOrderHeader] ON [Sales].[Customer].[CustomerID] = [Sales].[SalesOrderHeader].[CustomerID] INNER JOIN [Sales].[SalesOrderDetail] ON [Sales].[SalesOrderHeader].[SalesOrderID] = [Sales].[SalesOrderDetail].[SalesOrderID] INNER JOIN [Production].[Product] ON [Sales].[SalesOrderDetail].[ProductID] = [Production].[Product].[ProductID] INNER JOIN [Production].[ProductSubcategory] ON [Production].[Product].[ProductSubcategoryID] = [Production].[ProductSubcategory].[ProductSubcategoryID] INNER JOIN [Production].[ProductCategory] ON [Production].[ProductSubcategory].[ProductCategoryID] = [Production].[ProductCategory].[ProductCategoryID] WHERE [Production].[ProductCategory].[Name] = 'Bikes' ORDER BY CustomerName;"
+    },
+    {
+        "Pregunta": "¿Cuáles son los territorios con mayor cantidad de órdenes?",
+        "Consulta SQL Generada": "SELECT [Sales].[SalesTerritory].[Name] AS Territory, COUNT([Sales].[SalesOrderHeader].[SalesOrderID]) AS OrderCount FROM [Sales].[SalesOrderHeader] INNER JOIN [Sales].[SalesTerritory] ON [Sales].[SalesOrderHeader].[TerritoryID] = [Sales].[SalesTerritory].[TerritoryID] GROUP BY [Sales].[SalesTerritory].[Name] ORDER BY OrderCount DESC;"
+    },
+    {
+        "Pregunta": "Detalle de las órdenes realizadas por un cliente específico",
+        "Consulta SQL Generada": "SELECT [Sales].[SalesOrderHeader].[SalesOrderID], [Sales].[SalesOrderHeader].[OrderDate], [Sales].[SalesOrderDetail].[ProductID], [Production].[Product].[Name] AS ProductName, [Sales].[SalesOrderDetail].[OrderQty], [Sales].[SalesOrderDetail].[UnitPrice], [Sales].[SalesOrderDetail].[LineTotal] FROM [Sales].[Customer] INNER JOIN [Person].[Person] ON [Sales].[Customer].[PersonID] = [Person].[Person].[BusinessEntityID] INNER JOIN [Sales].[SalesOrderHeader] ON [Sales].[Customer].[CustomerID] = [Sales].[SalesOrderHeader].[CustomerID] INNER JOIN [Sales].[SalesOrderDetail] ON [Sales].[SalesOrderHeader].[SalesOrderID] = [Sales].[SalesOrderDetail].[SalesOrderID] INNER JOIN [Production].[Product] ON [Sales].[SalesOrderDetail].[ProductID] = [Production].[Product].[ProductID] WHERE [Person].[Person].[BusinessEntityID] = 12345 ORDER BY [Sales].[SalesOrderHeader].[OrderDate] DESC, [Sales].[SalesOrderDetail].[ProductID];"
+    },
+    {
+        "Pregunta": "¿Qué productos tienen bajo stock?",
+        "Consulta SQL Generada": "SELECT [Production].[Product].[ProductID], [Production].[Product].[Name], SUM([Production].[ProductInventory].[Quantity]) AS TotalQuantity, [Production].[Product].[SafetyStockLevel] FROM [Production].[Product] LEFT JOIN [Production].[ProductInventory] ON [Production].[Product].[ProductID] = [Production].[ProductInventory].[ProductID] GROUP BY [Production].[Product].[ProductID], [Production].[Product].[Name], [Production].[Product].[SafetyStockLevel] HAVING SUM(ISNULL([Production].[ProductInventory].[Quantity], 0)) < [Production].[Product].[SafetyStockLevel] ORDER BY TotalQuantity;"
+    },
+    {
+        "Pregunta": "Ventas por vendedor y territorio",
+        "Consulta SQL Generada": "SELECT [Person].[Person].[BusinessEntityID], [Person].[Person].[FirstName] + ' ' + [Person].[Person].[LastName] AS SalesPerson, [Sales].[SalesTerritory].[Name] AS Territory, SUM([Sales].[SalesOrderHeader].[TotalDue]) AS TotalSales FROM [Sales].[SalesPerson] INNER JOIN [Person].[Person] ON [Sales].[SalesPerson].[BusinessEntityID] = [Person].[Person].[BusinessEntityID] INNER JOIN [Sales].[SalesTerritory] ON [Sales].[SalesPerson].[TerritoryID] = [Sales].[SalesTerritory].[TerritoryID] INNER JOIN [Sales].[SalesOrderHeader] ON [Sales].[SalesPerson].[BusinessEntityID] = [Sales].[SalesOrderHeader].[SalesPersonID] GROUP BY [Person].[Person].[BusinessEntityID], [Person].[Person].[FirstName], [Person].[Person].[LastName], [Sales].[SalesTerritory].[Name] ORDER BY [Sales].[SalesTerritory].[Name], TotalSales DESC;"
+    },
+    {
+        "Pregunta": "Lista de productos con sus componentes",
+        "Consulta SQL Generada": "SELECT [Production].[Product].[ProductID] AS AssemblyID, [Production].[Product].[Name] AS AssemblyName, [Components].[ProductID] AS ComponentID, [Components].[Name] AS ComponentName, [Production].[BillOfMaterials].[PerAssemblyQty] AS QuantityPerAssembly FROM [Production].[BillOfMaterials] INNER JOIN [Production].[Product] ON [Production].[BillOfMaterials].[ProductAssemblyID] = [Production].[Product].[ProductID] INNER JOIN [Production].[Product] AS [Components] ON [Production].[BillOfMaterials].[ComponentID] = [Components].[ProductID] WHERE [Production].[BillOfMaterials].[EndDate] IS NULL ORDER BY [Production].[Product].[Name], [Components].[Name];"
+    }
+] 

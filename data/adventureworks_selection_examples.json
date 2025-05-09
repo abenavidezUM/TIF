@@ -1,0 +1,82 @@
+[
+    {
+        "Pregunta": "¿Cuántos productos hay por categoría?",
+        "Tablas Seleccionadas": ["Production.Product", "Production.ProductSubcategory", "Production.ProductCategory"]
+    },
+    {
+        "Pregunta": "Muestra los 5 primeros productos con sus nombres y precios",
+        "Tablas Seleccionadas": ["Production.Product"]
+    },
+    {
+        "Pregunta": "¿Cuál es el producto más caro?",
+        "Tablas Seleccionadas": ["Production.Product"]
+    },
+    {
+        "Pregunta": "¿Cuáles son las ventas totales por territorio?",
+        "Tablas Seleccionadas": ["Sales.SalesOrderHeader", "Sales.SalesTerritory"]
+    },
+    {
+        "Pregunta": "¿Quiénes son los mejores vendedores en términos de ventas totales?",
+        "Tablas Seleccionadas": ["Sales.SalesPerson", "Person.Person"]
+    },
+    {
+        "Pregunta": "¿Cuáles son los productos más vendidos?",
+        "Tablas Seleccionadas": ["Sales.SalesOrderDetail", "Production.Product"]
+    },
+    {
+        "Pregunta": "Lista de clientes con sus direcciones completas",
+        "Tablas Seleccionadas": ["Sales.Customer", "Person.Person", "Person.Address", "Person.StateProvince", "Person.CountryRegion"]
+    },
+    {
+        "Pregunta": "¿Cuál es el inventario actual por producto y ubicación?",
+        "Tablas Seleccionadas": ["Production.ProductInventory", "Production.Product", "Production.Location"]
+    },
+    {
+        "Pregunta": "Obtener el detalle de las órdenes de compra por proveedor",
+        "Tablas Seleccionadas": ["Purchasing.PurchaseOrderHeader", "Purchasing.PurchaseOrderDetail", "Purchasing.Vendor"]
+    },
+    {
+        "Pregunta": "Número de empleados por departamento",
+        "Tablas Seleccionadas": ["HumanResources.Employee", "HumanResources.EmployeeDepartmentHistory", "HumanResources.Department"]
+    },
+    {
+        "Pregunta": "¿Cuál es la ganancia bruta por producto?",
+        "Tablas Seleccionadas": ["Production.Product", "Sales.SalesOrderDetail"]
+    },
+    {
+        "Pregunta": "Lista de productos con su subcategoría y categoría",
+        "Tablas Seleccionadas": ["Production.Product", "Production.ProductSubcategory", "Production.ProductCategory"]
+    },
+    {
+        "Pregunta": "Ventas totales por mes del año pasado",
+        "Tablas Seleccionadas": ["Sales.SalesOrderHeader"]
+    },
+    {
+        "Pregunta": "Productos agrupados por color",
+        "Tablas Seleccionadas": ["Production.Product"]
+    },
+    {
+        "Pregunta": "Clientes que compraron productos de ciclismo",
+        "Tablas Seleccionadas": ["Sales.Customer", "Person.Person", "Sales.SalesOrderHeader", "Sales.SalesOrderDetail", "Production.Product", "Production.ProductSubcategory", "Production.ProductCategory"]
+    },
+    {
+        "Pregunta": "¿Cuáles son los territorios con mayor cantidad de órdenes?",
+        "Tablas Seleccionadas": ["Sales.SalesOrderHeader", "Sales.SalesTerritory"]
+    },
+    {
+        "Pregunta": "Detalle de las órdenes realizadas por un cliente específico",
+        "Tablas Seleccionadas": ["Sales.Customer", "Person.Person", "Sales.SalesOrderHeader", "Sales.SalesOrderDetail", "Production.Product"]
+    },
+    {
+        "Pregunta": "¿Qué productos tienen bajo stock?",
+        "Tablas Seleccionadas": ["Production.Product", "Production.ProductInventory"]
+    },
+    {
+        "Pregunta": "Ventas por vendedor y territorio",
+        "Tablas Seleccionadas": ["Sales.SalesPerson", "Person.Person", "Sales.SalesOrderHeader", "Sales.SalesTerritory"]
+    },
+    {
+        "Pregunta": "Lista de productos con sus componentes",
+        "Tablas Seleccionadas": ["Production.Product", "Production.BillOfMaterials"]
+    }
+] 

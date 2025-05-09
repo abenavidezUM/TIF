@@ -1,0 +1,67 @@
+[
+    {"Name": "Production.Product",
+     "Description": "Información de productos y artículos que AdventureWorks vende a sus clientes. Incluye ID del producto, nombre, número de producto, costos, precios y características como color, tamaño y peso."},
+    
+    {"Name": "Production.ProductCategory",
+     "Description": "Categorías principales de productos. Vincula el ID de categoría con nombres como 'Bikes', 'Components', 'Clothing', o 'Accessories'."},
+    
+    {"Name": "Production.ProductSubcategory",
+     "Description": "Subcategorías de productos que se relacionan con las categorías principales. Ejemplos incluyen 'Mountain Bikes', 'Road Bikes', 'Helmets', 'Jerseys'."},
+    
+    {"Name": "Sales.Customer",
+     "Description": "Información de los clientes de AdventureWorks. Incluye tanto clientes individuales (con PersonID) como tiendas (con StoreID)."},
+    
+    {"Name": "Person.Person",
+     "Description": "Datos personales de individuos, incluyendo empleados, clientes individuales y contactos. Contiene nombre, apellido, información de contacto y datos demográficos."},
+    
+    {"Name": "Sales.SalesOrderHeader",
+     "Description": "Encabezados de órdenes de venta. Contiene información sobre la orden completa: cliente, vendedor, fechas, importes totales y direcciones de facturación y envío."},
+    
+    {"Name": "Sales.SalesOrderDetail",
+     "Description": "Detalles de líneas individuales de órdenes de venta. Incluye productos específicos vendidos, cantidad, precio unitario y descuentos."},
+    
+    {"Name": "Sales.SalesPerson",
+     "Description": "Información de los vendedores, incluyendo cuotas de venta, bonos, comisiones y ventas totales."},
+    
+    {"Name": "Sales.SalesTerritory",
+     "Description": "Territorios de venta organizados por regiones geográficas. Incluye datos de ventas y costos por territorio."},
+    
+    {"Name": "HumanResources.Employee",
+     "Description": "Información de empleados, incluyendo datos personales y laborales como cargo, fecha de contratación y horas de vacaciones."},
+    
+    {"Name": "Person.Address",
+     "Description": "Direcciones postales de personas y entidades, incluyendo ciudad, estado/provincia y código postal."},
+    
+    {"Name": "Person.StateProvince",
+     "Description": "Estados o provincias donde AdventureWorks tiene presencia. Vincula con países y territorios de venta."},
+    
+    {"Name": "Person.CountryRegion",
+     "Description": "Países y regiones donde AdventureWorks opera o tiene contactos."},
+    
+    {"Name": "Purchasing.PurchaseOrderHeader",
+     "Description": "Encabezados de órdenes de compra a proveedores, incluyendo fechas, estado y montos totales."},
+    
+    {"Name": "Purchasing.PurchaseOrderDetail",
+     "Description": "Detalles de líneas individuales de órdenes de compra, con productos, cantidades y precios unitarios."},
+    
+    {"Name": "Purchasing.Vendor",
+     "Description": "Información de proveedores con los que AdventureWorks realiza transacciones."},
+    
+    {"Name": "Production.ProductInventory",
+     "Description": "Inventario actual de productos por ubicación, incluyendo cantidad disponible."},
+    
+    {"Name": "Production.Location",
+     "Description": "Ubicaciones físicas dentro de las instalaciones de AdventureWorks, como almacenes y puntos de fabricación."},
+    
+    {"Name": "Production.WorkOrder",
+     "Description": "Órdenes de trabajo para la fabricación de productos, con cantidades y fechas programadas."},
+    
+    {"Name": "Sales.CreditCard",
+     "Description": "Información de tarjetas de crédito utilizadas en transacciones de venta."},
+    
+    {"Name": "Sales.Currency",
+     "Description": "Monedas utilizadas en transacciones internacionales."},
+    
+    {"Name": "Production.BillOfMaterials",
+     "Description": "Lista de materiales y componentes necesarios para fabricar productos."}
+] 

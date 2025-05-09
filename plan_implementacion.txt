@@ -1,0 +1,167 @@
+# Plan de Implementación - Aplicación NL a SQL para AdventureWorks
+
+## Objetivo
+Crear una aplicación web que convierta consultas en lenguaje natural a consultas SQL para la base de datos AdventureWorks, utilizando modelos de lenguaje y técnicas de procesamiento de lenguaje natural.
+
+## Estructura del Proyecto
+```
+adventureworks_nl2sql/
+├── app.py                  # Aplicación principal FastAPI
+├── database/               # Módulo de conexión a la base de datos
+│   ├── __init__.py
+│   └── connection.py       # Funciones de conexión a SQL Server
+├── models/                 # Módulos para los modelos
+│   ├── __init__.py
+│   ├── embeddings.py       # Funciones para embeddings
+│   └── llm.py              # Wrappers para LLM (OpenAI)
+├── data/                   # Archivos de datos
+│   ├── adventureworks_tables_description.json
+│   ├── adventureworks_relations.json
+│   ├── adventureworks_selection_examples.json
+│   └── adventureworks_generation_examples.json
+├── utils/                  # Utilidades
+│   ├── __init__.py
+│   ├── text_processing.py  # Procesamiento de texto
+│   └── sql_utils.py        # Utilidades SQL
+├── core/                   # Lógica central de la aplicación
+│   ├── __init__.py
+│   ├── query_generator.py  # Generador de consultas
+│   └── table_selector.py   # Selector de tablas
+└── requirements.txt        # Dependencias
+```
+
+## Paso 1: Configuración inicial
+1. Crear el entorno virtual:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # En Windows: venv\Scripts\activate
+   ```
+
+2. Instalar dependencias:
+   ```bash
+   pip install fastapi uvicorn openai python-dotenv pandas pyodbc sqlalchemy sentence-transformers langchain langchain_community
+   ```
+
+3. Crear el archivo requirements.txt:
+   ```bash
+   pip freeze > requirements.txt
+   ```
+
+4. Crear archivo .env para configuración:
+   ```
+   OPENAI_API_KEY=sk-...
+   SQL_SERVER=localhost,1433
+   SQL_DATABASE=AdventureWorks2019
+   SQL_USERNAME=sa
+   SQL_PASSWORD=StrongPassword123!
+   ```
+
+## Paso 2: Conexión a la base de datos
+1. Implementar el módulo database/connection.py con:
+   - Función para conectar a SQL Server
+   - Función para ejecutar consultas
+   - Función para obtener esquema de la base de datos
+
+## Paso 3: Configuración de modelos
+1. Implementar models/llm.py:
+   - Wrapper para OpenAI con manejo de errores
+   - Función para llamar a la API con prompts específicos
+
+2. Implementar models/embeddings.py:
+   - Configuración de modelos de embeddings
+   - Funciones para obtener embeddings de textos
+
+## Paso 4: Procesamiento de datos
+1. Implementar carga y procesamiento de archivos JSON:
+   - Carga de descripciones de tablas
+   - Carga de relaciones
+   - Carga de ejemplos de entrenamiento
+
+2. Implementar utilidades para procesamiento de texto:
+   - Función para extracción de tablas desde SQL
+   - Limpieza de texto y normalización
+
+## Paso 5: Lógica principal
+1. Implementar core/table_selector.py:
+   - Selección de tablas relevantes para una consulta
+   - Uso de embeddings para recuperar documentos similares
+   - Normalización de nombres de tablas
+
+2. Implementar core/query_generator.py:
+   - Generación de consultas SQL basadas en la pregunta
+   - Uso de ejemplos para mejorar la generación
+   - Sistema de fallback para casos de error
+
+## Paso 6: API y endpoints
+1. Implementar app.py con FastAPI:
+   - Endpoint /query para generar consultas SQL
+   - Endpoint /execute para ejecutar consultas
+   - Endpoint /schema para obtener esquema de la BD
+   - Endpoint /health para verificar estado
+
+## Paso 7: Prompts y templates
+1. Crear prompts efectivos para:
+   - Selección de tablas:
+     ```
+     Eres un experto en esquemas de bases de datos. Selecciona las tablas necesarias para responder: {pregunta}
+     Esquema disponible:
+     {esquema}
+     Devuelve solo los nombres de las tablas separados por comas. Nada más.
+     ```
+
+   - Generación de SQL:
+     ```
+     Genera una consulta SQL para SQL Server que responda a: {pregunta}
+     Tablas relevantes: {tablas}
+     Esquema:
+     {esquema_filtrado}
+     
+     La consulta debe usar sintaxis T-SQL con formato [Esquema].[Tabla].[Columna].
+     No incluyas explicaciones, solo la consulta SQL terminada con punto y coma.
+     ```
+
+## Paso 8: Testing y validación
+1. Probar con consultas comunes:
+   - "¿Cuántos productos hay por categoría?"
+   - "Lista de los mejores clientes por volumen de compras"
+   - "Ventas por región en el último año"
+
+2. Validar que las consultas generadas:
+   - Sean sintácticamente correctas
+   - Devuelvan los resultados esperados
+   - Manejen diferentes tipos de preguntas
+
+## Paso 9: Optimización
+1. Mejorar tiempos de respuesta:
+   - Cachear resultados frecuentes
+   - Optimizar carga de modelos
+
+2. Mejorar precisión:
+   - Ajustar parámetros de temperatura
+   - Refinar los prompts
+
+## Paso 10: Documentación
+1. Documentar código
+2. Crear instrucciones de uso
+3. Documentar ejemplos de consultas
+
+## Consideraciones Importantes
+1. **Manejo de Errores**: Implementar manejo robusto de errores en cada nivel.
+2. **Logging**: Agregar sistema de logs para depuración.
+3. **Seguridad**: Validar entrada de usuario para prevenir inyección SQL.
+4. **Rendimiento**: Optimizar para respuesta rápida.
+5. **Claridad de Código**: Mantener código limpio y bien documentado.
+
+## Arquitectura Simple
+La arquitectura sigue un flujo sencillo:
+1. Usuario envía una pregunta
+2. Se seleccionan tablas relevantes
+3. Se genera la consulta SQL
+4. Se ejecuta la consulta (opcional)
+5. Se devuelve el resultado
+
+## Mejoras Potenciales
+1. Interfaz web con React/Vue
+2. Sistema de retroalimentación para mejorar con el uso
+3. Soporte para más dialectos SQL
+4. Cache de consultas frecuentes 

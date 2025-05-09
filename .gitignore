@@ -1,0 +1,33 @@
+# Entorno virtual
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de entorno
+.env
+
+# Archivos del sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Cachés y logs
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Directorios específicos del proyecto
+vectorstore/
+
+# IDEs y editores
+.idea/
+.vscode/
+*.swp
+*.swo 
